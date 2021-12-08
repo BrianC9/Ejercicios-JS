@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu 1</title>
+    <script>
+      function iniciar() {
+        numeroNodos = 30;
+        txtInicio = "Instrucciones: pulsa alguna opción del menú superior";
+        for (let index = 0; index < numeroNodos; index++) {
+          var div = creaNodo("div");
+          div.id = "div" + (index + 1);
+          div.className = "menu " + (index + 1);
+          div.innerHTML = "menu " + (index + 1);
+          div.style.border = "1px solid black";
+          div.style.width = "100px";
+          div.style.textAlign = "center";
+          div.style.margin = "0 20px 10px 0";
+          div.style.float = "left";
+          div.style.cursor = "pointer";
+          div.onclick = cambiaTexto;
+          div.onmouseover = cambiaFondo;
+          div.onmouseout = restableceFondo;
+        }
+
+        var parrafo = creaNodo("p");
+        parrafo.id = "parr";
+        parrafo.innerHTML = txtInicio;
+        parrafo.style.clear = "left";
+        parrafo;
+      }
+
+      // Obtener un número(por defecto entre 0 y 9)
+      function numeroAleatorio(min = 0, max = 9) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+      }
+
+      // Cambiar el texto del parrafo de inicio por otra cadena de texto aleatoria
+      function cambiaTexto() {
+        var parrafo = document.getElementById("parr");
+        txtRandom =
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's";
+
+        textoAleatorio = txtRandom.substr(
+          numeroAleatorio(1, txtRandom.length - 240),
+          240
+        );
+
+        if (textoAleatorio.charAt(0) == " ") {
+          textoAleatorio = textoAleatorio.trimStart().concat(" ");
+        }
+
+        textoFinal =
+          textoAleatorio.charAt(0).toUpperCase() + textoAleatorio.slice(1);
+
+        parrafo.innerHTML =
+          "<strong>" + this.className + ":</strong><br>" + textoFinal;
+      }
+      // Crear un nodo del tipo que le pasemos como parámetro
+      function creaNodo(tipo) {
+        var ele = document.createElement(tipo);
+        document.body.appendChild(ele); // posicionarlo en DOM
+        return ele; // lo retornamos para trabajar con el
+      }
+      // Cambiar el fondo con un efecto Hover
+      function restableceFondo() {
+        this.style.backgroundColor = "white";
+      }
+      function cambiaFondo() {
+        this.style.backgroundColor = "cyan";
+      }
+      // Cuando se cargue todo el DOM, que se ejecute la funcion iniciar
+      window.onload = iniciar;
+    </script>
+  </head>
+  <body></body>
+</html>
