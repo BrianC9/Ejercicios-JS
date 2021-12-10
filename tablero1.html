@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tablero 1 - Bryan Cusme</title>
+    <script>
+      function iniciar() {
+        var numeroFilas=8;
+        var numeroColumnas=8;
+        var ele = document.createElement("div");
+        document.body.appendChild(ele);
+        ele.style.boxSizing="border-box";
+        ele.style.width="400px";
+        ele.style.height="400px";
+        
+        for (let index = 1; index <= numeroFilas; index++) {
+          
+          for (let j = 1; j <= numeroColumnas; j++) {
+            var div = document.createElement("div");
+          div.innerHTML = "H";
+          div.id=`Caja ${j}${index}`;
+          div.style.boxSizing="border-box";
+          div.style.backgroundColor="lightblue"
+          div.style.width="45px";
+          div.style.margin="2.5px";
+          div.style.height="45px";
+          div.style.float="left";
+          ele.appendChild(div);
+          div.addEventListener("click",alerta)
+            
+            
+          }
+         
+          
+        }
+ 
+       
+      }
+      function alerta(){
+        window.alert(this.id)
+      }
+      
+
+      window.onload = iniciar;
+    </script>
+  </head>
+  <body></body>
+</html>
