@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tablero 1 - Bryan Cusme</title>
+    <title>Tablero 2 - Bryan Cusme</title>
     <script>
       function iniciar() {
         var numeroFilas=8;
@@ -14,6 +14,7 @@
         ele.style.boxSizing="border-box";
         ele.style.width="400px";
         ele.style.height="400px";
+        ele.className="container"
         
         for (let index = 1; index <= numeroFilas; index++) {
           
@@ -35,12 +36,25 @@
          
           
         }
- 
+      var divBorrador=document.getElementById("Caja 88");
+      divBorrador.style.cursor="pointer";
+      divBorrador.addEventListener("click", borraInner);
+     
+      function borraInner(){
+        var divs=document.querySelector(".container").querySelectorAll("div");
+        divs.forEach(caja => {
+          caja.innerHTML=" ";
+        });
+      }
        
       }
+      
+      
       function alerta(){
         window.alert(this.id);
       }
+
+      
      
       
 
