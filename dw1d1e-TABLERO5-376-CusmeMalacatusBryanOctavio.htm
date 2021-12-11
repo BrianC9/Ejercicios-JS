@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tablero 5 - Bryan Cusme</title>
+    <script>
+      function iniciar() {
+        var numeroFilas = 8;
+        var numeroColumnas = 8;
+
+        for (let i = 1; i <= numeroFilas; i++) {
+          for (let j = 1; j <= numeroColumnas; j++) {
+            var div = document.createElement("div");
+            div.innerHTML = `H${j}${i}`;
+            div.id = `C${j}${i}`;
+            div.style.boxSizing = "border-box";
+            div.style.backgroundColor = "blue";
+            div.style.width = "60px";
+            div.style.height = "60px";
+            div.style.margin = "2px";
+            div.style.textAlign = "center";
+            div.style.float = "left";
+            div.style.cursor="pointer";
+            document.body.appendChild(div);
+            if (j == 1) {
+              div.style.clear = "left";
+            }
+            div.addEventListener("click",cambiaColor);
+          }
+        }
+
+        function cambiaTexto() {
+          var divs = document.querySelectorAll("div");
+          divs.forEach((caja) => {
+            if (caja.innerHTML === "") {
+              caja.innerHTML = caja.id;
+            } else {
+              caja.innerHTML = "";
+            }
+          });
+        }
+        function cambiaColor(){
+          var divs = document.querySelectorAll("div");
+          divs.forEach((caja) => {
+            caja.style.backgroundColor=getRandomColor();
+            this.style.backgroundColor="white";
+          });
+        }
+        function getRandomColor() {
+          var letras = "0123456789ABCDEF";
+          var color = "#";
+          for (var i = 0; i < 6; i++) {
+            color += letras[Math.floor(Math.random() * 16)];
+          }
+          return color;
+        }
+      }
+
+      window.onload = iniciar;
+    </script>
+  </head>
+  <body></body>
+</html>
