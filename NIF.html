@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comprobar NIF - Bryan Cusme</title>
+    <script>
+      //    errores
+      //   "número no es válido";
+      //   "número fuera de rango";
+      //   "letra fuera de rango A-Z";
+      //   "La letra o el número proporcionados no son correctos";
+
+      function iniciar() {
+        
+        var numero = window.prompt("Introduce una letra");
+        try {
+            var numero = window.prompt("Introduce un número de DNI");
+            if(numero =="" || isNaN(numero) || numero.toString().length >8) throw "Número no es válido";
+            if(numero > 99999999 || numero<0) throw "Número fuera de rango";
+
+        } catch (error) {
+            var MensajeError=error;
+        }
+        var letra = window.prompt("Introduce una letra de DNI en mayúsculas");
+        try {
+            var numero = window.prompt("Introduce una letra");
+            if(numero =="" || isNaN(numero) || numero.toString().length >8) throw "Número no es válido";
+            if(numero > 99999999 || numero<0) throw "Número fuera de rango";
+
+        } catch (error) {
+            var MensajeError=error;
+        }
+      }
+
+      window.onload = iniciar;
+    </script>
+  </head>
+  <body></body>
+</html>
