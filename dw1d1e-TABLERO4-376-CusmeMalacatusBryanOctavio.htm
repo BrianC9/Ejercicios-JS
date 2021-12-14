@@ -29,7 +29,12 @@
             div.addEventListener("click",cambiaColor);
           }
         }
-
+        function borraInner(){
+        var divs=document.querySelector(".container").querySelectorAll("div");
+        divs.forEach(caja => {
+          caja.innerHTML=" ";
+        });
+      }
         function cambiaTexto() {
           var divs = document.querySelectorAll("div");
           divs.forEach((caja) => {
@@ -44,6 +49,9 @@
           var divs = document.querySelectorAll("div");
           divs.forEach((caja) => {
             caja.style.backgroundColor=getRandomColor();
+            caja.innerHTML="";
+            caja.style.margin="0px";
+            caja.style.border="1px solid black";
             this.style.backgroundColor="white";
           });
         }
