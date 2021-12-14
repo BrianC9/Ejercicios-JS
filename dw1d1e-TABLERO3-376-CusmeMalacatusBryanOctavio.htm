@@ -22,42 +22,25 @@
             div.style.margin = "2px";
             div.style.textAlign = "center";
             div.style.float = "left";
-            div.style.border="1px solid black"
+            div.style.border = "1px solid black";
             document.body.appendChild(div);
-            div.addEventListener("click", alerta);
             if (j == 1) {
               div.style.clear = "left";
             }
+            div.addEventListener("click", cambiaTexto);
           }
         }
-// Toggle text para cambiar entre dos estados
-        var divBorrador = document.getElementById("C88");
-        divBorrador.style.cursor = "pointer";
-        divBorrador.addEventListener("click", cambiaTexto);
-        
 
         function cambiaTexto() {
           var divs = document.querySelectorAll("div");
           divs.forEach((caja) => {
-            if(caja.innerHTML === ""){
-              caja.innerHTML =caja.id;
-            }else{
-              caja.innerHTML = ""
-            }
-            ;
+            caja.innerHTML = caja.id;
           });
         }
-
-        
-         
       }
 
       function numeroAleatorio(min = 0, max = 9) {
         return Math.floor(Math.random() * (max - min + 1) + min);
-      }
-
-      function alerta() {
-        window.alert(this.id);
       }
 
       window.onload = iniciar;

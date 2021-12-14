@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comprobar NIF - Bryan Cusme</title>
+    <script>
+      //    errores
+      //   "número no es válido";
+      //   "número fuera de rango";
+      //   "letra fuera de rango A-Z";
+      //   "La letra o el número proporcionados no son correctos";
+
+      function iniciar() {
+        try {
+          var numero = window.prompt("Introduce un número de DNI");
+          if (
+            numero == "" ||
+            isNaN(numero) ||
+            (numero.toString().length > 8 && numero.toString().length < 8)
+          )
+            throw "Número no es válido";
+          if (numero > 99999999 || numero < 0) throw "Número fuera de rango";
+        } catch (error) {
+          var MensajeErrorNumero = error;
+        }
+        try {
+          var letra = window.prompt("Introduce una letra de DNI en mayúsculas");
+
+          if (letra.length > 1) throw "Letra fuera de rango A-Z";
+          if (!isNaN(letra)) throw "La letra no es válida";
+        } catch (error) {
+          var MensajeErrorLetra = error;
+        } finally {
+          var numeroHTML = creaElemento("p");
+          numeroHTML.innerHTML = "Número del DNI introducido: " + numero;
+          var letraHTML = creaElemento("p");
+          letraHTML.innerHTML = "Letra del DNI introducida: " + letra;
+          if (MensajeErrorNumero || MensajeErrorLetra) {
+            var errorHTML = creaElemento("p");
+            errorHTML.innerHTML =
+              "Error en la introducción de datos" +
+              "<br><br>" +
+              "Detalles del error:<br>" +
+              MensajeErrorNumero +
+              "<br>" +
+              MensajeErrorLetra;
+          } else {
+            var correcto = creaElemento("p");
+            correcto.innerHTML = "Número y letra correctos";
+          }
+        }
+      }
+      function creaElemento(tipo) {
+        var elemento = document.createElement(tipo);
+        document.body.append(elemento);
+        return elemento;
+      }
+
+      window.onload = iniciar;
+    </script>
+  </head>
+  <body></body>
+</html>
