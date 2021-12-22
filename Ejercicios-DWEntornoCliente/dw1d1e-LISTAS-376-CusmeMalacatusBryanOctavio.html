@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Listas - Bryan Cusme</title>
+    <script>
+      function iniciar() {
+        var parrafo = document.createElement("p");
+        var textoHTML = "<h2>Ejemplos de metodos de array</h2>";
+        parrafo.innerHTML = textoHTML;
+        document.body.append(parrafo);
+        const aleatorios = [];
+
+        for (let i = 0; i < 10; i++) {
+          aleatorios[i] = numeroAleatorio(0, 999);
+        }
+        var longitud = aleatorios.length;
+        parrafo.innerHTML += `<br>lista: ${aleatorios.join(", ")}`;
+        parrafo.innerHTML += `<br>ascendente: ${aleatorios.sort()}`;
+        parrafo.innerHTML += `<br>descendente: ${aleatorios.sort(function (
+          a,
+          b
+        ) {
+          return b - a;
+        })}`;
+
+        var suma = aleatorios.reduce((a, b) => (a += b));
+        var media = suma / longitud;
+
+        parrafo.innerHTML += `<br>media reduce: ${media}`;
+        parrafo.innerHTML += `<br>máximo apply ${Math.max.apply(
+          null,
+          aleatorios
+        )}`;
+        parrafo.innerHTML += `<br>mínimo apply ${Math.min.apply(
+          null,
+          aleatorios
+        )}`;
+        parrafo.innerHTML += `<br>mínimo sort ${aleatorios[0]}`;
+        parrafo.innerHTML += `<br>máximo sort ${
+          aleatorios[aleatorios.length - 1]
+        }`;
+        parrafo.innerHTML += `<br>suma reduce: ${suma}`;
+        parrafo.innerHTML += `<br>filtra entre 0 y 100: ${aleatorios
+          .filter((numero) => numero < 101)
+          .join(", ")}`;
+      }
+      function numeroAleatorio(min = 0, max = 9) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+      }
+      window.onload = iniciar;
+    </script>
+  </head>
+  <body></body>
+</html>
