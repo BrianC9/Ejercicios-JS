@@ -44,4 +44,7 @@ class Queue {
         }
     }
 }
-
+let cola = new Queue([1, 2, 3, 4, 5]);
+cola.enqueue(7);
+cola.enqueue(2)
+cola.show();
