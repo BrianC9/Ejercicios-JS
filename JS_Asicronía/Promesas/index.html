@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>Nombre del post: <span id="titlePost"></span></p>
+    <p>¿Está completo? <span id="completed"></span></p>
+
+    <script>
+      function cargarJson() {
+        //Simulación de la promesa que hace fetch
+        // fetch("https://jsonplaceholder.typicode.com/todos/190")
+        //   .then((response) => response.json())
+        //   .then(jsonCargado);
+        let promesa = new Promise((resolver) => {
+          setTimeout(() => {
+            let json = {
+              userId: 10,
+              id: 190,
+              title: "accusamus sint iusto et voluptatem exercitationem",
+              completed: true,
+            };
+            resolver(json);
+          }, 3500);
+        });
+
+        promesa
+          .then((json) => {
+            jsonCargado(json);
+          })
+          .then(document.write("Me ejecuto sin esperar los 3 segundos."));
+      }
+
+      function jsonCargado(json) {
+        let title = document.getElementById("titlePost");
+        let completed = document.getElementById("completed");
+        title.innerHTML = `${json.title}`;
+        completed.innerHTML = `${json.completed ? "Si lo está" : "No lo está"}`;
+        console.log(json);
+      }
+
+      cargarJson();
+    </script>
+  </body>
+</html>
