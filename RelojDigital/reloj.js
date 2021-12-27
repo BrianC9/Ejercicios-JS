@@ -15,5 +15,5 @@ setInterval(() => {
         segundos = `0${segundos}`;
     }
 
-    reloj.innerHTML = `${hora}:${minutos}:${segundos}`;
+    reloj.innerHTML = `${hora} : ${minutos} : ${segundos}`;
 }, 1000);

@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@800&display=swap");
+#container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+.reloj {
+  border: 16px outset rgb(93, 109, 114);
+  border-radius: 10px;
+  background-color: rgb(123, 167, 146);
+  padding: 1em 1.5em;
+  font-size: 4rem;
+  font-family: "Orbitron", sans-serif;
+  color: #fff;
+  text-shadow: 0 0 10px lawngreen, 0 0 20px lawngreen, 0 0 40px lawngreen;
+}
