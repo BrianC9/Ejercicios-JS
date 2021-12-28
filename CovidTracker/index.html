@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Covid Tracker</title>
+  </head>
+  <body>
+    <h1>Estadísticas del Covid19</h1>
+    <div class="container">
+      <label>Fecha:</label><input type="date" id="inputFecha" />
+      <label>País</label>
+      <select id="selectPais">
+        <option value="Spain">España</option>
+        <option value="France">Francia</option>
+        <option value="Germany">Alemania</option>
+        <option value="Italy">Italia</option>
+        <option value="Poland">Polonia</option>
+      </select>
+      <button id="btnCargar">Cargar estadísticas</button>
+      <br />
+      <div class="datos">
+        <ul>
+          <li>Confirmado: <span id="today_confirmed"></span></li>
+          <li>Muertes: <span id="today_deaths"></span></li>
+          <li>Cuidados intensivos: <span id="today_intensive_care"></span></li>
+          <li>Nuevos confirmados: <span id="today_new_confirmed"></span></li>
+          <li>Nuevas muertes: <span id="today_new_deaths"></span></li>
+          <li>
+            Cuidados intensivos:<span id="today_new_intensive_care"></span>
+          </li>
+          <li>
+            Nuevos casos abiertos: <span id="today_new_open_cases"></span>
+          </li>
+          <li>Nuevos recuperados: <span id="today_new_recovered"></span></li>
+          <li>
+            Nuevo total de pacientes hospitalizados:
+            <span id="today_new_total_hospitalised_patients"></span>
+          </li>
+          <li>Casos abiertos hoy: <span id="today_open_cases"></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
