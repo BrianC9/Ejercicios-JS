@@ -45,7 +45,7 @@
         parrafo.innerHTML += `<br>suma reduce: ${suma}`;
         parrafo.innerHTML += `<br>filtra entre 0 y 100: ${aleatorios
           .filter((numero) => numero < 101)
-          .join(", ")}`;
+          .join(" ")}`;
       }
       function numeroAleatorio(min = 0, max = 9) {
         return Math.floor(Math.random() * (max - min + 1) + min);

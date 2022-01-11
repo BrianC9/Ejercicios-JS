@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Listas - Bryan Cusme</title>
+    <script>
+      function iniciar() {
+        var parrafo = document.createElement("p");
+        var textoHTML = "<h2>Ejemplos de metodos de array</h2>";
+        parrafo.innerHTML = textoHTML;
+        document.body.append(parrafo);
+        const aleatorios = [];
+        const listaVersiones = [];
+
+        for (let i = 0; i < 10; i++) {
+          aleatorios[i] = {
+            color: getRandomColor(),
+            texto: "hola",
+            nivel: letraAleatoria(),
+            version: numeroAleatorio(),
+          };
+          listaVersiones.push(aleatorios[i].version);
+        }
+
+        for (let i = 0; i == 0; i++) {
+          let element = aleatorios[i];
+          parrafo.innerHTML += `Color: ${element.color}  Nivel:${element.nivel} Texto:${element.texto} Version: ${element.version} <br>`;
+        }
+        parrafo.innerHTML += `Lista de versiones: ${listaVersiones.join(" ")}`;
+        aleatorios.forEach((element) => {});
+
+        var longitudListaVersiones = listaVersiones.length;
+        parrafo.innerHTML += `<br>ascendente: ${listaVersiones.sort()}`;
+        parrafo.innerHTML += `<br>descendente: ${listaVersiones
+          .sort(function (a, b) {
+            return b - a;
+          })
+          .join()}`;
+      }
+
+      function numeroAleatorio(min = 0, max = 9) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+      }
+      function letraAleatoria() {
+        letras = ["A", "B", "C"];
+        return letras[numeroAleatorio(0, 2)];
+      }
+      function getRandomColor() {
+        var letras = "0123456789ABCDEF";
+        var color = "#";
+        for (var i = 0; i < 6; i++) {
+          color += letras[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+
+      window.onload = iniciar;
+    </script>
+  </head>
+  <body></body>
+</html>
