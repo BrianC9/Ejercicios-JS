@@ -7,12 +7,11 @@
     <title>Listas 3- Bryan Cusme</title>
     <script>
       function iniciar() {
-        var parrafo = document.createElement("p");
-        var textoHTML = "<h2>Ejemplos de metodos de array</h2>";
-        parrafo.innerHTML = textoHTML;
-        document.body.append(parrafo);
+        let divContainer = document.createElement("div");
+        document.body.append(divContainer);
         const aleatorios = [];
         const listaVersiones = [];
+        let divObjeto = document.createElement("div");
 
         for (let i = 0; i < 10; i++) {
           aleatorios[i] = {
@@ -20,43 +19,23 @@
             texto: "hola",
             nivel: letraAleatoria(),
             version: numeroAleatorio(),
+            alto: dimensionAleatoria(50, 70, 90),
+            ancho: dimensionAleatoria(40, 60),
           };
           listaVersiones.push(aleatorios[i].version);
         }
+        console.log(...aleatorios);
 
-        for (let i = 0; i == 0; i++) {
-          let element = aleatorios[i];
-          parrafo.innerHTML += `Primer objeto de la lista (for): Color: ${element.color}  Nivel:${element.nivel} Texto:${element.texto} Version: ${element.version} <br>`;
+        for (const i of aleatorios) {
+          divObjeto.style.height = `${i.alto}px`;
+          divObjeto.style.width = `${i.ancho}px`;
+          divObjeto.style.backgroundColor = `${i.color}`;
+          divContainer.appendChild(divObjeto);
         }
-        parrafo.innerHTML += `Primer objeto serializar ${JSON.stringify(
-          aleatorios[0]
-        ).trim("{")} <br>`;
-        parrafo.innerHTML += `Lista de versiones: ${listaVersiones.join(" ")}`;
-        aleatorios.forEach((element) => {});
-
-        var longitudListaVersiones = listaVersiones.length;
-        parrafo.innerHTML += `<br>ascendente: ${listaVersiones
-          .sort()
-          .join(" ")}`;
-        parrafo.innerHTML += `<br>descendente: ${listaVersiones
-          .sort(function (a, b) {
-            return b - a;
-          })
-          .join(" ")}`;
-        var suma = listaVersiones.reduce((a, b) => (a += b));
-        var media = suma / longitudListaVersiones;
-
-        parrafo.innerHTML += `<br>media: ${media}`;
-        parrafo.innerHTML += `<br>mínimo ${listaVersiones[0]}`;
-        parrafo.innerHTML += `<br>máximo sort ${
-          listaVersiones[listaVersiones.length - 1]
-        }`;
-        parrafo.innerHTML += `<br>suma: ${suma}`;
-        parrafo.innerHTML += `<br>filtra entre 0 y 5: ${listaVersiones
-          .filter((numero) => numero < 6)
-          .join(" ")}`;
       }
-
+      function dimensionAleatoria(...args) {
+        return args[numeroAleatorio(0, args.length - 1)];
+      }
       function numeroAleatorio(min = 0, max = 9) {
         return Math.floor(Math.random() * (max - min + 1) + min);
       }
@@ -67,6 +46,7 @@
       function getRandomColor() {
         var letras = "0123456789ABCDEF";
         var color = "#";
+
         for (var i = 0; i < 6; i++) {
           color += letras[Math.floor(Math.random() * 16)];
         }
