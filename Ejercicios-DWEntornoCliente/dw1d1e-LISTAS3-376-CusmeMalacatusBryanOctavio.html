@@ -8,6 +8,7 @@
     <script>
       function iniciar() {
         let divContainer = document.createElement("div");
+        let titulo = document.createElement("p");
         document.body.append(divContainer);
         const aleatorios = [];
         const listaVersiones = [];
@@ -23,20 +24,61 @@
           };
           listaVersiones.push(aleatorios[i].version);
         }
-        console.log(...aleatorios);
 
-        for (const i of aleatorios) {
-          let divObjeto = document.createElement("div");
+        muestraListado(aleatorios, "Listado (Texto:nivel y versión)");
 
-          divObjeto.style.height = `${i.alto}px`;
-          divObjeto.style.width = `${i.ancho}px`;
-          divObjeto.style.backgroundColor = `${i.color}`;
-          divObjeto.style.textAlign = "center";
-          divObjeto.innerText = `${i.texto}:${i.texto} `;
-          divObjeto.style.float = "left";
-          divContainer.appendChild(divObjeto);
+        const listadoAscendente = aleatorios.sort((a, b) => {
+          return a.version - b.version;
+        });
+        muestraListado(listadoAscendente, "Ascendente X version");
+
+        const listadoDescendente = aleatorios.sort((a, b) => {
+          return b.version - a.version;
+        });
+        muestraListado(listadoDescendente, "Descendente X version");
+
+        const filtrado = aleatorios.filter((objeto) => {
+          return objeto.version < 6;
+        });
+        muestraListado(filtrado, "Filtrado X versión  ");
+
+        const suma = aleatorios
+          .map((item) => item.version)
+          .reduce((prev, curr) => prev + curr, 0);
+
+        let parrafoSuma = document.createElement("div");
+        parrafoSuma.innerHTML = `Suma: <strong> ${suma}</strong>`;
+        parrafoSuma.style.border = "1px solid gray";
+        parrafoSuma.style.padding = "2px 0";
+        divContainer.appendChild(parrafoSuma);
+
+        function muestraListado(listaDeObjetos, textoTitulo) {
+          let divTitulo = document.createElement("div");
+          divTitulo.style.padding = "2px 0";
+          divTitulo.style.border = "1px solid gray";
+          divTitulo.innerHTML = textoTitulo;
+          let divContainerObjeto = document.createElement("div");
+          divContainerObjeto.style.border = "1px solid  ";
+          divContainerObjeto.style.display = "flex";
+          divContainerObjeto.style.margin = "10px 0";
+
+          for (const i of listaDeObjetos) {
+            let divObjeto = document.createElement("div");
+            divObjeto.style.height = `${i.alto}px`;
+            divObjeto.style.width = `${i.ancho}px`;
+            divObjeto.style.backgroundColor = `${i.color}`;
+            divObjeto.style.textAlign = "center";
+            divObjeto.innerText = `${i.texto}:${i.nivel} ${i.version} `;
+
+            divObjeto.style.border = "1px solid black";
+            divObjeto.style.margin = "5px 5px";
+            divContainerObjeto.appendChild(divObjeto);
+            divContainer.appendChild(divTitulo);
+            divContainer.appendChild(divContainerObjeto);
+          }
         }
       }
+
       function letraAleatoria() {
         let letras = "ABCDEFGHIJKL";
         return letras[numeroAleatorio(0, letras.length - 1)];
