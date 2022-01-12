@@ -11,13 +11,12 @@
         document.body.append(divContainer);
         const aleatorios = [];
         const listaVersiones = [];
-        let divObjeto = document.createElement("div");
 
         for (let i = 0; i < 10; i++) {
           aleatorios[i] = {
             color: getRandomColor(),
-            texto: "hola",
-            nivel: letraAleatoria(),
+            texto: letraAleatoria(),
+            nivel: nivelAleatorio(),
             version: numeroAleatorio(),
             alto: dimensionAleatoria(50, 70, 90),
             ancho: dimensionAleatoria(40, 60),
@@ -27,11 +26,20 @@
         console.log(...aleatorios);
 
         for (const i of aleatorios) {
+          let divObjeto = document.createElement("div");
+
           divObjeto.style.height = `${i.alto}px`;
           divObjeto.style.width = `${i.ancho}px`;
           divObjeto.style.backgroundColor = `${i.color}`;
+          divObjeto.style.textAlign = "center";
+          divObjeto.innerText = `${i.texto}:${i.texto} `;
+          divObjeto.style.float = "left";
           divContainer.appendChild(divObjeto);
         }
+      }
+      function letraAleatoria() {
+        let letras = "ABCDEFGHIJKL";
+        return letras[numeroAleatorio(0, letras.length - 1)];
       }
       function dimensionAleatoria(...args) {
         return args[numeroAleatorio(0, args.length - 1)];
@@ -39,7 +47,7 @@
       function numeroAleatorio(min = 0, max = 9) {
         return Math.floor(Math.random() * (max - min + 1) + min);
       }
-      function letraAleatoria() {
+      function nivelAleatorio() {
         letras = ["A", "B", "C"];
         return letras[numeroAleatorio(0, 2)];
       }
