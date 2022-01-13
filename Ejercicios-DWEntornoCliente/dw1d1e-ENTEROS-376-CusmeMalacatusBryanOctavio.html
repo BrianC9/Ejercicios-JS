@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Enteros - Bryan Cusme</title>
+    <script>
+      function iniciar() {
+        let numeroCasillas = numeroAleatorio(2, 20);
+        const divContenedor = document.createElement("div");
+        document.body.appendChild(divContenedor);
+        for (let i = 0; i < numeroCasillas; i++) {
+          const textArea = document.createElement("input");
+          textArea.type = "textarea";
+          textArea.style.margin = "5px";
+          textArea.style.background = "lightblue";
+          textArea.style.border = "1px dashed";
+          divContenedor.appendChild(textArea);
+        }
+      }
+
+      function numeroAleatorio(min = 0, max = 9) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+      }
+      window.onload = iniciar;
+    </script>
+  </head>
+  <body></body>
+</html>
