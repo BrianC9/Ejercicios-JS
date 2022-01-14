@@ -1,46 +1,59 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Enteros - Bryan Cusme</title>
     <script>
-        function iniciar() {
-            const divContenedor = document.createElement("div");
-            document.body.appendChild(divContenedor);
-            for (let i = 0; i < 4; i++) {
-                let textArea = document.createElement("input");
-                textArea.type = "textarea";
-                textArea.style.border = "1px solid gray";
-                textArea.style.borderRadius="2px"
-                textArea.style.padding="5px"
-                document.body.appendChild(textArea);
+      function iniciar() {
+        const divContenedor = document.createElement("div");
+        document.body.appendChild(divContenedor);
+        for (let i = 0; i < 4; i++) {
+          let textArea = document.createElement("input");
+          textArea.type = "textarea";
+          textArea.style.border = "1px solid gray";
+          textArea.style.borderRadius = "2px";
+          textArea.style.padding = "5px";
+          document.body.appendChild(textArea);
+        }
+        let mensajeEstado = document.createElement("div");
+        document.body.appendChild(mensajeEstado);
+        let casillas = document.querySelectorAll("input");
+        let listaValores = [];
+        /*
+        casillas.forEach((elemento, indice) => {
+          elemento.addEventListener("focusout", (evento) => {
+            console.log(elemento.value, indice);
+            listaValores[indice] = elemento.value;
+            console.log(listaValores);
+            if (listaValores.some("")) {
+              mensajeEstado.innerHTML = "Hay algun valor vacío";
+            }else{
+              mensajeEstado.innerHTML ="Orden ascendente:"+ listaValores.sort().join(" ")+"<br>";
             }
-            let mensajeEstado=document.createElement("div")
-            document.body.appendChild(mensajeEstado)
-            let casillas=document.querySelectorAll("input");
-            casillas.forEach((input,indice)=>{
-                input.addEventListener("keyup", ()=>{
-                    mensajeEstado.innerText =`El input e${input.value}+${indice}`;
-                })
-            })
-            
 
 
-            
-            
-        }
+        }) */
+        casillas.forEach((input, indice) => {
+          input.addEventListener("focusout", (eveneto) => {
+            listaValores[indice] = input.value;
+            if (listaValores.some((valor) => valor === "")) {
+              mensajeEstado.innerHTML = "Hay algun valor vacío";
+            } else {
+              mensajeEstado.innerHTML =
+                "Orden ascendente:" + listaValores.sort().join(" ") + "<br>";
+            }
+            console.log(listaValores);
+          });
+        });
+      }
 
-
-
-        function numeroAleatorio(min = 0, max = 9) {
-            return Math.floor(Math.random() * (max - min + 1) + min);
-        }
-        window.onload = iniciar;
+      function numeroAleatorio(min = 0, max = 9) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+      }
+      window.onload = iniciar;
     </script>
-</head>
+  </head>
 
-<body></body>
-
+  <body></body>
 </html>
