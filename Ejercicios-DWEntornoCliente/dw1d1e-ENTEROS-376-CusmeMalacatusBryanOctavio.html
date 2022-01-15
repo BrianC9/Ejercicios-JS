@@ -14,38 +14,74 @@
           textArea.style.border = "1px solid gray";
           textArea.style.borderRadius = "2px";
           textArea.style.padding = "5px";
+          textArea.style.width = "50px";
           document.body.appendChild(textArea);
         }
         let mensajeEstado = document.createElement("div");
+        mensajeEstado.innerHTML = "rellena con enteros";
+        let mensajeCasillas = document.createElement("div");
+
         document.body.appendChild(mensajeEstado);
+        document.body.appendChild(mensajeCasillas);
         let casillas = document.querySelectorAll("input");
-        let listaValores = [];
-        /*
-        casillas.forEach((elemento, indice) => {
-          elemento.addEventListener("focusout", (evento) => {
-            console.log(elemento.value, indice);
-            listaValores[indice] = elemento.value;
-            console.log(listaValores);
-            if (listaValores.some("")) {
-              mensajeEstado.innerHTML = "Hay algun valor vacío";
-            }else{
-              mensajeEstado.innerHTML ="Orden ascendente:"+ listaValores.sort().join(" ")+"<br>";
-            }
+        let listaValores = ["", "", "", ""];
 
-
-        }) */
         casillas.forEach((input, indice) => {
-          input.addEventListener("focusout", (eveneto) => {
-            listaValores[indice] = input.value;
-            if (listaValores.some((valor) => valor === "")) {
-              mensajeEstado.innerHTML = "Hay algun valor vacío";
+          input.addEventListener("keyup", (evento) => {
+            if (isNaN(evento.currentTarget.value)) {
+              mensajeEstado.innerHTML = `La casilla ${
+                indice + 1
+              } no es un entero: ${input.value}. Corrígelo!`;
             } else {
-              mensajeEstado.innerHTML =
-                "Orden ascendente:" + listaValores.sort().join(" ") + "<br>";
+              listaValores[indice] = input.value;
+
+              mensajeEstado.innerHTML = `Orden ascendente: ${ordenaAsc(
+                listaValores
+              )} <br>`;
+              mensajeEstado.innerHTML += `Orden descendente: ${ordenaDesc(
+                listaValores
+              )}`;
             }
-            console.log(listaValores);
+          });
+          input.addEventListener("keyup", () => {
+            if (listaValores.some((valor) => valor === "")) {
+              mensajeCasillas.innerHTML =
+                " Falta por rellenar " +
+                compruebaVacias(listaValores) +
+                " casillas";
+            } else {
+              mensajeCasillas.innerHTML = "";
+            }
           });
         });
+      }
+      function compruebaVacias(lista) {
+        let numVacias = 0;
+        for (let index = 0; index < lista.length; index++) {
+          if (lista[index] === "") {
+            numVacias++;
+          }
+        }
+        return numVacias;
+      }
+      function ordenaDesc(lista) {
+        console.log("DES" + lista);
+
+        let copiaLista = [...lista];
+        return copiaLista
+          .sort((a, b) => {
+            return b - a;
+          })
+          .join(" ");
+      }
+      function ordenaAsc(lista) {
+        console.log("ASC" + lista);
+        let copiaLista = [...lista];
+        return copiaLista
+          .sort((a, b) => {
+            return a - b;
+          })
+          .join(" ");
       }
 
       function numeroAleatorio(min = 0, max = 9) {
