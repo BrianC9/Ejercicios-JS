@@ -5,6 +5,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tabla Valores - Bryan Cusme</title>
+    <script>
+      function iniciar() {
+        let datosCSV = document.createElement("div");
+        datosCSV.innerHTML = "1)texto CSV:<br>";
+        let tablaDatos = document.createElement("table");
+        tablaDatos.style.border = "1px solid #ddd";
+        tablaDatos.innerHTML = `<tr><th>x</th>
+      <th>cos(x)</th>
+      <th>seno(x)</th>
+      <th>seno(x)</th>
+      <th>14 decimales</th>
+      <th>x con decimales</th></tr>`;
+
+        document.body.appendChild(datosCSV);
+        document.body.appendChild(tablaDatos);
+        for (let i = 0; i <= 12.0; i += 0.6) {
+          datosCSV.innerHTML += `${i.toFixed(2)}#${Math.cos(i).toFixed(
+            2
+          )}#${Math.sin(i).toFixed(2)}#${Math.sin(i)}#${i.toFixed(
+            14
+          )}#${i} <br>`;
+
+          tablaDatos.innerHTML += `<tr><td>${i.toFixed(2)}</td>
+    <td>${Math.cos(i).toFixed(2)}</td>
+    <td>${Math.sin(i).toFixed(2)}</td>
+    <td>${Math.sin(i)}</td>
+    <td>${i.toFixed(14)}</td>
+    <td>${i}</td></tr>`;
+        }
+        datosCSV.innerHTML += "<br>2) tabla de valores en tabla";
+
+        let cabeceras = document.querySelectorAll("th");
+        cabeceras.forEach((th) => {
+          th.style.background = "lightgreen";
+          th.style.border = "1px solid #ddd";
+          th.style.padding = "5px 10px";
+        });
+        let filas = document.querySelectorAll("tr ");
+        filas.forEach((filas, indice) => {
+          if (indice % 2 == 0) {
+            filas.style.background = "lightgray";
+            filas.style.border = "1px solid #ddd";
+            filas.style.padding = "5px 10px";
+          }
+        });
+      }
+      window.onload = iniciar;
+    </script>
   </head>
   <body></body>
 </html>
