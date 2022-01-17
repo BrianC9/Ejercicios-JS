@@ -45,6 +45,7 @@
           });
           input.addEventListener("keyup", () => {
             if (listaValores.some((valor) => valor === "")) {
+              mensajeEstado.innerHTML = "";
               mensajeCasillas.innerHTML =
                 " Falta por rellenar " +
                 compruebaVacias(listaValores) +
