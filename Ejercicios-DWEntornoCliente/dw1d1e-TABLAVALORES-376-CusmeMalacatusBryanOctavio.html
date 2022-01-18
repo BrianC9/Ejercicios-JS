@@ -12,15 +12,17 @@
         let tablaDatos = document.createElement("table");
         tablaDatos.style.border = "1px solid #ddd";
         tablaDatos.innerHTML = `<tr><th>x</th>
-      <th>cos(x)</th>
-      <th>seno(x)</th>
-      <th>seno(x)</th>
-      <th>14 decimales</th>
-      <th>x con decimales</th></tr>`;
+        <th>cos(x)</th>
+        <th>seno(x)</th>
+        <th>seno(x)</th>
+        <th>14 decimales</th>
+        <th>x con decimales</th></tr>`;
 
         document.body.appendChild(datosCSV);
         document.body.appendChild(tablaDatos);
+        const listaValores = new Array();
         for (let i = 0; i <= 12.0; i += 0.6) {
+          listaValores.push(Math.cos(i).toFixed(2));
           datosCSV.innerHTML += `${i.toFixed(2)}#${Math.cos(i).toFixed(
             2
           )}#${Math.sin(i).toFixed(2)}#${Math.sin(i)}#${i.toFixed(
@@ -28,11 +30,11 @@
           )}#${i} <br>`;
 
           tablaDatos.innerHTML += `<tr><td>${i.toFixed(2)}</td>
-    <td>${Math.cos(i).toFixed(2)}</td>
-    <td>${Math.sin(i).toFixed(2)}</td>
-    <td>${Math.sin(i)}</td>
-    <td>${i.toFixed(14)}</td>
-    <td>${i}</td></tr>`;
+      <td>${Math.cos(i).toFixed(2)}</td>
+      <td>${Math.sin(i).toFixed(2)}</td>
+      <td>${Math.sin(i)}</td>
+      <td>${i.toFixed(14)}</td>
+      <td>${i}</td></tr>`;
         }
         datosCSV.innerHTML += "<br>2) tabla de valores en tabla";
 
@@ -50,6 +52,23 @@
             filas.style.padding = "5px 10px";
           }
         });
+        console.log(...listaValores);
+        const creaCanvas = document.createElement("canvas");
+        creaCanvas.style.background = "lightgray";
+        creaCanvas.style.width = "600px";
+        creaCanvas.style.height = "300px";
+
+        const ctx = creaCanvas.getContext("2d");
+
+        ctx.beginPath(); // Start a new path
+
+        for (let i = 0; i < listaValores.length; i++) {
+          ctx.lineTo(0 + 10 * i, 0 + 5 * listaValores[i]);
+          console.log(i, ":", listaValores[i]);
+        }
+
+        ctx.stroke();
+        document.body.appendChild(creaCanvas);
       }
       window.onload = iniciar;
     </script>
