@@ -4,14 +4,16 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tabla Valores - Bryan Cusme</title>
+    <title>Tabla Valores 2 - Bryan Cusme</title>
     <script>
       function iniciar() {
         let datosCSV = document.createElement("div");
         let tablaDatos = document.createElement("table");
         let titulo = document.createElement("div");
         const creaCanvas = document.createElement("canvas");
-
+        creaCanvas.style.background = "lightgray";
+        creaCanvas.style.width = "500px";
+        creaCanvas.style.height = "220px";
         datosCSV.innerHTML = "1)Texto CSV:<br>";
 
         tablaDatos.innerHTML = `<tr>
@@ -30,9 +32,13 @@
 
         document.body.appendChild(creaCanvas);
 
-        const listaValores = new Array();
+        const listaValores = [];
+        const listaSenos = [];
+        const listaTang = [];
         for (let i = 0; i <= 12.0; i += 0.6) {
           listaValores.push(Math.cos(i).toFixed(2));
+          listaSenos.push(Math.sin(i).toFixed(2));
+          listaTang.push(Math.tan(i).toFixed(2));
           datosCSV.innerHTML += `${i.toFixed(2)}#${Math.cos(i).toFixed(
             2
           )}#${Math.sin(i).toFixed(2)}#${Math.sin(i)}#${i.toFixed(
@@ -46,19 +52,18 @@
       <td>${Math.sin(i)}</td>
       <td>${i.toFixed(14)}</td>
       <td>${i}</td></tr>`;
-          creaCanvas.style.background = "lightgray";
-          creaCanvas.style.width = "500px";
-          creaCanvas.style.height = "220px";
         }
 
         datosCSV.innerHTML += "2) Tabla de valores:";
+        // Gráficas
+        dibujaFunciones(creaCanvas, listaValores, "red");
 
-        let ctx = creaCanvas.getContext("2d");
-        ctx.beginPath(); // Start a new path
-        for (let i = 0; i < listaValores.length; i++) {
-          ctx.lineTo(10 + 13 * i, 75 + 26 * listaValores[i]);
-        }
-        ctx.stroke();
+        //Segunda gráfica
+        dibujaFunciones(creaCanvas, listaSenos, "blue");
+
+        dibujaFunciones(creaCanvas, listaSenos, "green");
+
+        // Cabeceras de la tabla
         let cabeceras = document.querySelectorAll("th");
         cabeceras.forEach((th) => {
           th.style.background = "lightgreen";
@@ -73,6 +78,17 @@
             filas.style.padding = "5px 10px";
           }
         });
+      }
+      function dibujaFunciones(canvas, datos, color) {
+        let ctx = canvas.getContext("2d");
+        ctx.beginPath(); // Start a new path
+        ctx.strokeStyle = color;
+        for (let i = 0; i < datos.length; i++) {
+          ctx.lineTo(10 + 13 * i, 75 + 26 * datos[i]);
+        }
+        ctx.stroke();
+
+        ctx.closePath();
       }
       window.onload = iniciar;
     </script>
