@@ -4,6 +4,46 @@
     <meta charset="UTF-8" />
 
     <title>Menu JS - Bryan Cusme</title>
+    <script>
+      const datos = [
+        "A1#america#00",
+        "A2#europa#00",
+        "A3#africa#00",
+        "A4#asia#00",
+        "B1#canada#A1",
+        "B2#eeuu#A1",
+        "B3#brasil#A1",
+        "B4#argentina#A1",
+        "B5#urugay#A1",
+        "B6#chile#A1",
+        "B7#francia#A2",
+        "B8#italia#A2",
+        "C1#toronto#B1",
+        "C2#quebec#B1",
+        "C3#lyon#B7",
+        "C4#paris#B7",
+        "C5#bayona#B7",
+        "C6#nantes#B7",
+        "C7#toulouse#B7",
+      ];
+      const listaContinentes = [];
+      const listaPaises = [];
+      const listaCiudades = [];
+      function iniciar() {
+        for (const el of datos) {
+          if (el.split("#")[0][0] === "A") listaContinentes.push(el);
+          if (el.split("#")[0][0] === "B") listaPaises.push(el);
+          if (el.split("#")[0][0] === "C") listaCiudades.push(el);
+        }
+
+        console.log(listaContinentes);
+        console.log(listaPaises);
+
+        console.log(listaCiudades);
+      }
+
+      window.onload = iniciar;
+    </script>
   </head>
   <body></body>
 </html>
