@@ -30,18 +30,87 @@
       const listaPaises = [];
       const listaCiudades = [];
       function iniciar() {
+        const divMigasTitutlo = creaElemento(document.body);
+
+        const divContinentes = creaElemento(document.body);
+        const divPaises = creaElemento(document.body);
+        const divCiudades = creaElemento(document.body);
+        divMigasTitutlo.innerHTML = "Home";
         for (const el of datos) {
           if (el.split("#")[0][0] === "A") listaContinentes.push(el);
           if (el.split("#")[0][0] === "B") listaPaises.push(el);
           if (el.split("#")[0][0] === "C") listaCiudades.push(el);
         }
 
-        console.log(listaContinentes);
-        console.log(listaPaises);
-
-        console.log(listaCiudades);
+        listaContinentes.forEach((elemento) => {
+          let btnConti = creaBtn(elemento, divContinentes);
+          btnConti.addEventListener("click", mostrarHijos);
+        });
+        function mostrarHijos() {
+          let paisesMostrar = [];
+          for (const pais of listaPaises) {
+            if (this.id === pais.split("#")[2]) {
+              paisesMostrar.push(pais);
+            }
+          }
+          divPaises.innerHTML = "";
+          divMigasTitutlo.innerHTML = " Home > " + this.innerHTML;
+          paisesMostrar.forEach((elemento) => {
+            let btnPaisMostrados = creaBtn(elemento, divPaises);
+            btnPaisMostrados.addEventListener("click", (evento) => {
+              divMigasTitutlo.innerHTML =
+                " Home > " + this.innerHTML + " > " + evento.target.innerHTML;
+              let ciudadesMostrar = [];
+              for (const ciudad of listaCiudades) {
+                if (evento.target.id === ciudad.split("#")[2]) {
+                  ciudadesMostrar.push(ciudad);
+                }
+              }
+              divCiudades.innerHTML = "";
+              ciudadesMostrar.forEach((elemento) => {
+                let btnCiudadMostrada = creaBtn(elemento, divCiudades);
+                btnCiudadMostrada.addEventListener("click", (evento2) => {
+                  divMigasTitutlo.innerHTML =
+                    " Home > " +
+                    this.innerHTML +
+                    " > " +
+                    evento.target.innerHTML +
+                    " > " +
+                    evento2.target.innerHTML;
+                });
+              });
+            });
+          });
+        }
       }
 
+      function creaBtn(elemento, divContenedor) {
+        let btn = creaElemento(divContenedor);
+        btn.id = elemento.split("#")[0];
+        btn.style.border = "1px solid gray";
+        btn.style.display = "inline";
+        btn.style.padding = "0 25px";
+        btn.style.cursor = "pointer";
+        btn.onmouseover = cambiaFondo;
+        btn.onmouseout = restableceFondo;
+        btn.innerHTML = elemento.split("#")[1];
+
+        return btn;
+      }
+      function restableceFondo() {
+        this.style.backgroundColor = "white";
+        this.style.color = "black";
+      }
+      function cambiaFondo() {
+        this.style.backgroundColor = "gray";
+        this.style.color = "white";
+      }
+      function creaElemento(padre) {
+        let ele = document.createElement("div");
+        ele.style.margin = "5px 0";
+        padre.appendChild(ele);
+        return ele;
+      }
       window.onload = iniciar;
     </script>
   </head>
