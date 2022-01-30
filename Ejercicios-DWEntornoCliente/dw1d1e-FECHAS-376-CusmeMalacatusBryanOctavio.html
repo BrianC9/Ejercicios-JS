@@ -23,7 +23,6 @@
         divFechaSeleccionada.style.display = "Flex ";
         divFechaSeleccionada.style.justifyContent = "center ";
         divFechaSeleccionada.style.alignItems = "center ";
-        divFechaSeleccionada.style.margin = "0 0 20px 0";
 
         document.body.appendChild(divFechaSeleccionada);
         let inputFecha = creaEle("input");
@@ -38,29 +37,104 @@
         let divFechasNormales = creaEle("div");
         divFechasNormales.style.clear = "left";
         document.body.appendChild(divFechasNormales);
-        let titulo = creaEle("h3");
-        titulo.innerHTML = "soy un parrafo";
-        divFechasNormales.appendChild(titulo);
+        let tituloFechasNormales = creaEle("h3");
+        tituloFechasNormales.innerHTML = "Tabla de fechas aleatorias";
+        divFechasNormales.appendChild(tituloFechasNormales);
         const coleccionFechas = [];
         for (let i = 0; i < 24; i++) {
           coleccionFechas.push(
-            randomDate(new Date(2019, 1, 1), new Date(2019, 12, 31))
+            randomDate(new Date(2019, 1, 1), new Date(2020, 0, 0))
           );
         }
         coleccionFechas.forEach((fecha, index) => {
           let divFecha = creaEle("div");
           divFechasNormales.appendChild(divFecha);
-          divFecha.style.width = "100px";
-          divFecha.style.padding = "10px";
+          divFecha.style.width = "80px";
+          divFecha.style.padding = "3px";
           divFecha.style.border = "1px solid gray";
           divFecha.style.float = "left";
-          divFecha.innerHTML = `${fecha.toLocaleDateString("es-ES")}`;
+          divFecha.innerHTML = `${fecha
+            .toLocaleDateString("es-ES")
+            .replace("/", "-")
+            .replace("/", "-")}`;
           if (index % 6 == 0) {
             divFecha.style.clear = "left";
           }
         });
-      }
+        let divFechasAscendentes = creaEle("div");
+        divFechasAscendentes.style.clear = "left";
+        document.body.appendChild(divFechasAscendentes);
+        let tituloAsc = creaEle("h3");
+        tituloAsc.innerHTML = "Tabla de fechas ordenadas de menor a mayor ";
+        divFechasAscendentes.appendChild(tituloAsc);
+        const coleccionAsc = coleccionFechas.sort((a, b) => {
+          return a.getTime() - b.getTime();
+        });
 
+        coleccionAsc.forEach((fecha, index) => {
+          let divFecha = creaEle("div");
+          divFechasAscendentes.appendChild(divFecha);
+          divFecha.style.width = "80px";
+          divFecha.style.padding = "3px";
+          divFecha.style.border = "1px solid gray";
+          divFecha.style.float = "left";
+          divFecha.innerHTML = `${fecha
+            .toLocaleDateString("es-ES")
+            .replace("/", "-")
+            .replace("/", "-")}`;
+          if (index % 6 == 0) {
+            divFecha.style.clear = "left";
+          }
+        });
+
+        let divFechasDesc = creaEle("div");
+        divFechasDesc.style.clear = "left";
+        document.body.appendChild(divFechasDesc);
+        let tituloDesc = creaEle("h3");
+        tituloDesc.innerHTML = "Tabla de fechas ordenadas de mayor a menor ";
+        divFechasDesc.appendChild(tituloDesc);
+        const coleccionDesc = coleccionFechas.sort((a, b) => {
+          return b.getTime() - a.getTime();
+        });
+
+        coleccionDesc.forEach((fecha, index) => {
+          let divFecha = creaEle("div");
+          divFechasDesc.appendChild(divFecha);
+          divFecha.style.width = "80px";
+          divFecha.style.padding = "3px";
+          divFecha.style.border = "1px solid gray";
+          divFecha.style.float = "left";
+          divFecha.innerHTML = `${fecha
+            .toLocaleDateString("es-ES")
+            .replace("/", "-")
+            .replace("/", "-")}`;
+          if (index % 6 == 0) {
+            divFecha.style.clear = "left";
+          }
+        });
+        let fechaAltaBaja = creaEle("div");
+        fechaAltaBaja.style.clear = "left";
+        let fechaMax = new Date(Math.max(...coleccionFechas));
+        let fechaMin = new Date(Math.min(...coleccionFechas));
+        document.body.appendChild(fechaAltaBaja);
+        fechaAltaBaja.innerHTML = `<h3>Fecha más alta y baja</h3> Fecha más alta: ${fechaMax
+          .toLocaleDateString("es-Es")
+          .replace("/", "-")
+          .replace("/", "-")}<br>Fecha más baja: ${fechaMin
+          .toLocaleDateString("es-ES")
+          .replace("/", "-")
+          .replace("/", "-")}`;
+
+        let day_as_milliseconds = 86400000;
+        let diff_in_millisenconds = fechaMax - fechaMin;
+        let diff_in_days = diff_in_millisenconds / day_as_milliseconds;
+        let diferenciaFechaAltaBaja = creaEle("div");
+        document.body.appendChild(diferenciaFechaAltaBaja);
+        diferenciaFechaAltaBaja.style.clear = "left";
+        diferenciaFechaAltaBaja.innerHTML = `<h3>Diferencia entre la fecha más alta y más baja</h3> ${Math.trunc(
+          diff_in_days
+        )} días `;
+      }
       function randomDate(start, end) {
         return new Date(
           start.getTime() + Math.random() * (end.getTime() - start.getTime())
