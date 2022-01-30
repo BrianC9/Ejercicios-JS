@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Fechas - Bryan Cusme</title>
+    <script>
+      function iniciar() {
+        let divInput = creaEle("div");
+        divInput.style.border = "1px solid gray";
+        divInput.style.padding = "10px";
+        divInput.style.width = "140 px";
+        divInput.style.height = "30px";
+
+        divInput.style.display = "inline-block";
+        divInput.style.float = "left";
+        document.body.appendChild(divInput);
+        let divFechaSeleccionada = creaEle("div");
+        divFechaSeleccionada.style.border = "1px solid gray";
+        divFechaSeleccionada.style.padding = "10px";
+        divFechaSeleccionada.style.width = "140px";
+        divFechaSeleccionada.style.height = "30px";
+        divFechaSeleccionada.style.textAlign = "center";
+        divFechaSeleccionada.style.float = "left";
+
+        document.body.appendChild(divFechaSeleccionada);
+        let inputFecha = creaEle("input");
+        inputFecha.type = "date";
+        divInput.appendChild(inputFecha);
+
+        inputFecha.addEventListener("change", (evento) => {
+          console.log(inputFecha.value);
+          divFechaSeleccionada.innerHTML = inputFecha.value;
+        });
+      }
+
+      function randomDate(start, end) {
+        return new Date(
+          start.getTime() + Math.random() * (end.getTime() - start.getTime())
+        );
+      }
+      function creaEle(tipo) {
+        let ele = document.createElement(tipo);
+
+        return ele;
+      }
+
+      window.onload = iniciar;
+    </script>
+  </head>
+  <body></body>
+</html>
