@@ -19,8 +19,11 @@
         divFechaSeleccionada.style.padding = "10px";
         divFechaSeleccionada.style.width = "140px";
         divFechaSeleccionada.style.height = "30px";
-        divFechaSeleccionada.style.textAlign = "center";
         divFechaSeleccionada.style.float = "left";
+        divFechaSeleccionada.style.display = "Flex ";
+        divFechaSeleccionada.style.justifyContent = "center ";
+        divFechaSeleccionada.style.alignItems = "center ";
+        divFechaSeleccionada.style.margin = "0 0 20px 0";
 
         document.body.appendChild(divFechaSeleccionada);
         let inputFecha = creaEle("input");
@@ -30,6 +33,31 @@
         inputFecha.addEventListener("change", (evento) => {
           console.log(inputFecha.value);
           divFechaSeleccionada.innerHTML = inputFecha.value;
+        });
+
+        let divFechasNormales = creaEle("div");
+        divFechasNormales.style.clear = "left";
+        document.body.appendChild(divFechasNormales);
+        let titulo = creaEle("h3");
+        titulo.innerHTML = "soy un parrafo";
+        divFechasNormales.appendChild(titulo);
+        const coleccionFechas = [];
+        for (let i = 0; i < 24; i++) {
+          coleccionFechas.push(
+            randomDate(new Date(2019, 1, 1), new Date(2019, 12, 31))
+          );
+        }
+        coleccionFechas.forEach((fecha, index) => {
+          let divFecha = creaEle("div");
+          divFechasNormales.appendChild(divFecha);
+          divFecha.style.width = "100px";
+          divFecha.style.padding = "10px";
+          divFecha.style.border = "1px solid gray";
+          divFecha.style.float = "left";
+          divFecha.innerHTML = `${fecha.toLocaleDateString("es-ES")}`;
+          if (index % 6 == 0) {
+            divFecha.style.clear = "left";
+          }
         });
       }
 
