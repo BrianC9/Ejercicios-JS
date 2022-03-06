@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CALENDARIO</title>
+    <script>
+      let anio = 0;
+      function inciar() {
+        anio = 2022;
+        crearMes(0, "Enero");
+        crearMes(1, "Febrero");
+        crearMes(2, "Marzo");
+        crearMes(3, "Abril");
+        crearMes(4, "Mayo");
+        crearMes(5, "Junio");
+        crearMes(6, "Julio");
+        crearMes(7, "Agosto");
+        crearMes(8, "Septimbre");
+        crearMes(9, "Octubre");
+        crearMes(10, "Noviembre");
+        crearMes(11, "Diciembre");
+      }
+
+      function crearMes(n, nombre) {
+        let milisegundos = 86400000;
+        var p = document.createElement("p");
+        document.body.appendChild(p);
+        p.innerHTML = nombre;
+        p.style.marginRight = "150px";
+        p.style.float = "left";
+        p.style.clear = "left";
+
+        let fecha = new Date(anio, n, 1);
+        let catorceDiasAntes = fecha.getTime() - milisegundos * 14;
+        let primerDia;
+        let buscarDia = new Date(catorceDiasAntes);
+
+        for (let i = 0; i < 7; i++) {
+          if (buscarDia.getDay() == 1) {
+            primerDia = buscarDia.getTime();
+          } else {
+            buscarDia.setTime(buscarDia.getTime() + milisegundos);
+          }
+        }
+        calendario(primerDia, n);
+      }
+
+      function calendario(primerDia, n) {
+        let milisegundos = 86400000;
+        primerDia = new Date(primerDia);
+        for (let i = 0; i < 49; i++) {
+          let d = divsFecha();
+          switch (primerDia.getDay()) {
+            case 0:
+              d.innerHTML = primerDia.getDate() + "</br> D";
+              d.style.color = "#C0392B";
+              break;
+            case 1:
+              d.innerHTML = primerDia.getDate() + "</br> L";
+              break;
+            case 2:
+              d.innerHTML = primerDia.getDate() + "</br> M";
+              break;
+            case 3:
+              d.innerHTML = primerDia.getDate() + "</br> X";
+              break;
+            case 4:
+              d.innerHTML = primerDia.getDate() + "</br> J";
+              break;
+            case 5:
+              d.innerHTML = primerDia.getDate() + "</br> V";
+              break;
+            case 6:
+              d.innerHTML = primerDia.getDate() + "</br> S";
+              d.style.color = "#C0392B";
+              break;
+            default:
+              break;
+          }
+          if (primerDia.getMonth() == n) {
+            d.style.backgroundColor = "lightgreen";
+          }
+          primerDia.setTime(primerDia.getTime() + milisegundos);
+        }
+      }
+      function divsFecha() {
+        var d = document.createElement("div");
+        document.body.appendChild(d);
+        d.style.width = "20px";
+        d.style.height = "40px";
+        d.style.backgroundColor = " lightyellow";
+        d.style.margin = "1px";
+        d.style.float = "left";
+        d.style.display = "flex";
+        d.style.justifyContent = "center";
+        d.style.color = "#212F3C";
+
+        return d;
+      }
+
+      window.onload = inciar;
+    </script>
+  </head>
+
+  <body></body>
+</html>

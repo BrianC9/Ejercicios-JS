@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script>
+      function iniciar() {
+        let año = 2022;
+
+        let diasSemana = [
+          "Domingo",
+          "Lunes",
+          "Martes",
+          "Miércoles",
+          "Jueves",
+          "Viernes",
+          "Sábado",
+        ];
+        let meses = [
+          "Enero",
+          "Febrero",
+          "Marzo",
+          "Abril",
+          "Mayo",
+          "Junio",
+          "Julio",
+          "Agosto",
+          "Septiembre",
+          "Octubre",
+          "Noviembre",
+          "Diciembre",
+        ];
+        for (let i = 1; i <= 12; i++) {
+          let diasMes = daysInMonth(i, año);
+          for (let dia = 1; dia <= diasMes; dia++) {
+            debugger;
+            // Ojo, hay que restarle 1 para obtener el mes correcto
+            let indice = new Date(año, i, dia).getDay();
+            let caja = creaCajaDia();
+            caja.style.float = "left";
+            caja.innerHTML = `${dia} <br> ${diasSemana[indice][0]}`;
+            document.body.appendChild(caja);
+            if (diasMes === dia) caja.style.clear = "left";
+          }
+        }
+      }
+      function creaCajaDia() {
+        let ele = document.createElement("div");
+        ele.style.width = "20px";
+        ele.style.height = "45px";
+        ele.style.border = "1px solid gray";
+        ele.style.textAlign = "center";
+        return ele;
+      }
+      function daysInMonth(month, year) {
+        return new Date(year, month, 0).getDate();
+      }
+
+      //www.iteramos.com/pregunta/37801/obtener-el-numero-de-dias-en-un-mes-especificado-usando-javascript
+      Fuente: https: window.onload = iniciar;
+    </script>
+  </head>
+  <body></body>
+</html>

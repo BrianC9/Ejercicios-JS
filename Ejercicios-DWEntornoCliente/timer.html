@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      function iniciar() {
+        for (let i = 0; i < 6; i++) {
+          let caja = creaCaja();
+          caja.style.width = "75px";
+          caja.style.height = "150px";
+          caja.style.border = "1px solid gray";
+          caja.style.float = "left";
+          document.body.appendChild(caja);
+        }
+        let timer = setTimeout(dibujar, 2000);
+        let time2 = setTimeout(dibujar2, 3000);
+
+        let time3 = setTimeout(dibujar3, 4000);
+
+        let timer4 = setTimeout(dibujar4, 5000);
+
+        let btn = document.querySelector("#btn");
+        let divShow = document.querySelector("#show");
+        divShow.style.width = "80px";
+        divShow.style.height = "40px";
+
+        function dibujar() {
+          divShow.style.borderTop = "1px solid gray";
+        }
+        function dibujar2() {
+          divShow.style.borderRight = "1px solid gray";
+        }
+        function dibujar3() {
+          divShow.style.borderBottom = "1px solid gray";
+        }
+        function dibujar4() {
+          divShow.style.borderLeft = "1px solid gray";
+        }
+      }
+      function creaCaja() {
+        let caja = document.createElement("div");
+        return caja;
+      }
+      window.onload = iniciar;
+
+      //borderTopLeftRadius ="100px 80px"
+    </script>
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
