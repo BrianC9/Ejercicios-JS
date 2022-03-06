@@ -26,7 +26,6 @@ async function cargarPelis() {
     let valor = document.getElementById("input").value;
 
     let datosJson = await cargarUrl(`https://www.omdbapi.com/?s=${valor}&apikey=aa1a087a`);
-    console.log(valor)
     let listaPelis = datosJson.Search
     for (let i = 0; i < listaPelis.length; i++) {
         coleccionObjetos.push(listaPelis[i])
@@ -35,7 +34,6 @@ async function cargarPelis() {
     btnOrdenaFecha.style.display = "inline-block"
     btnOrdenaNombre.style.display = "inline-block"
     btnInicio.style.display = "inline-block"
-    console.log(coleccionObjetos)
     document.body.removeChild(document.getElementById("formu"))
 
 }
@@ -44,7 +42,6 @@ function renderizarPelis() {
 
         let ficha = creaFicha(coleccionObjetos[i].Title, coleccionObjetos[i].imdbID, coleccionObjetos[i].Poster, coleccionObjetos[i].Year, coleccionObjetos[i].Type);
         divContenedor.appendChild(ficha)
-        console.log(coleccionObjetos[i])
     }
 }
 
@@ -60,12 +57,13 @@ function renderizaOrdenFecha() {
     renderizarPelis()
 }
 function creaFicha(titulo, id, poster, anio, type) {
-    let ficha = document.createElement('div')
+    let ficha = document.createElement('div');
+    let enlace = `<a href="https://www.imdb.com/title/${id}/" target="_blank">IMdb ID: ${id}</a>`
     let imagenRespaldo = " https://images.pexels.com/photos/3945313/pexels-photo-3945313.jpeg"
     ficha.className = "fichaPeli"
 
     ficha.innerHTML = `    <img src="${poster == 'N/A' ? imagenRespaldo : poster}" alt="poster de  ${titulo}"  ><br><span class ='titulo'>
-    ${titulo}</span>${id}<br>${type === 'movie' ? "Pelicula" : type === 'series' ? 'serie' : type}<br>${anio}`
+    ${titulo}</span>${enlace}${type === 'movie' ? "Pelicula" : type === 'series' ? 'serie' : type}<br>${anio}`
     ficha.style.textAlign = "center"
     return ficha;
 
