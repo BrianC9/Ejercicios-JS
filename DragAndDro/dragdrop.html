@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <script>
+      window.onload = iniciar;
+      function iniciar() {
+        let btnCrear = document.getElementById("btnCrear");
+        let container = document.querySelector(".container");
+
+        btnCrear.addEventListener("click", crearTarjeta);
+        let items = document.querySelectorAll(".container .box");
+        items.forEach(function (item) {
+          item.addEventListener("dragstart", handleDragStart);
+          item.addEventListener("dragend", handleDragEnd);
+        });
+        let rmv = document.querySelector(".rmv");
+        rmv.addEventListener("drop", handleDrop);
+        rmv.addEventListener("dragover", handleOver);
+        rmv.addEventListener("dragleave", handleLeave);
+
+        function crearTarjeta() {
+          const ele = document.createElement("div");
+          ele.className = "box";
+          ele.id = `Tarjeta ${document.querySelectorAll(".box").length}`;
+          ele.innerText = `Tarjeta ${document.querySelectorAll(".box").length}`;
+          ele.draggable = "true";
+          ele.addEventListener("dragstart", handleDragStart);
+          ele.addEventListener("dragend", handleDragEnd);
+
+          container.appendChild(ele);
+        }
+      }
+
+      function handleOver(ev) {
+        ev.preventDefault();
+        this.style.borderColor = "crimson";
+        this.style.background = "rose";
+      }
+
+      function handleLeave(ev) {
+        this.style.borderColor = "#666";
+      }
+
+      function handleDragStart(e) {
+        this.style.opacity = "0.4";
+        e.dataTransfer.setData("datos", e.target.id);
+        console.log(e.target.id);
+      }
+
+      function handleDragEnd(e) {
+        this.style.opacity = "1";
+      }
+
+      function handleDrop(e) {
+        e.preventDefault();
+        let data = e.dataTransfer.getData("datos");
+        let ele = document.getElementById(data);
+        console.log(e);
+        ele.parentElement.removeChild(ele);
+      }
+    </script>
+    <style>
+      .container {
+        display: flex;
+      }
+
+      .box {
+        border: 3px solid #666;
+        background-color: #ddd;
+        width: 128px;
+        border-radius: 0.5em;
+        padding: 10px;
+        cursor: move;
+        height: auto;
+        margin-right: 20px;
+      }
+      .rmv {
+        width: 64px;
+      }
+    </style>
+    <title>Drag and drop</title>
+  </head>
+  <body>
+    <button id="btnCrear">CREAR TARJETA</button>
+
+    <div class="container" id="container">
+      <div draggable="true" id="a" class="box">Tarjeta 1</div>
+      <div draggable="true" id="b" class="box">Tarjeta 2</div>
+      <div draggable="true" id="c" class="box">Tarjeta 3</div>
+    </div>
+    <div class="box rmv">
+      <img
+        src="https://img.icons8.com/external-tulpahn-flat-tulpahn/64/external-bin-mobile-user-interface-tulpahn-flat-tulpahn.png"
+      />
+    </div>
+  </body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="app.js"></script>
+
+    <title>Buscador con API</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      a {
+        display: inline-block;
+      }
+      img {
+        min-width: 100%;
+        height: 60%;
+        min-height: 230px;
+        object-fit: cover;
+        border-radius: 15px 15px 0 0;
+      }
+      #contenedor {
+        width: 100%;
+      }
+      .fichaPeli {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 180px;
+        height: 400px;
+        text-align: center;
+        border: 1px solid;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        margin: 0 15px 5px 0;
+        padding: 5px;
+        float: left;
+      }
+      .fichaPeli:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      }
+      .titulo {
+        font-weight: 500;
+        color: #3d6274;
+        margin-bottom: 3px;
+      }
+      .btnMenu {
+        margin: 10px 10px;
+        padding: 5px 10px;
+        outline: none;
+        border-radius: 5px;
+        background-color: white;
+        border: 1px solid darkcyan;
+        display: none;
+        cursor: pointer;
+      }
+      .btnMenu:hover {
+        background-color: darkcyan;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="formu">
+      <input type="text" id="input" placeholder="Busca una peli" required />
+      <button type="submit" id="btnCargar">Cargar películas</button>
+    </div>
+
+    <button class="btnMenu" id="btnInicio">Volver a inicio</button>
+    <button class="btnMenu" id="btnOrdenaFecha">Ordenar por fecha</button>
+    <button class="btnMenu" id="btnOrdenaNombre">Ordenar por nombre</button>
+
+    <div id="contenedor"></div>
+  </body>
+</html>
