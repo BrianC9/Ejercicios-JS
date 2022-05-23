@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Globos Bryan Cusme</title>
+    <style>
+      *,
+      *:before,
+      *:after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #ffebeb;
+        background: rgba(240, 248, 255, 0.9);
+        overflow: hidden;
+      }
+
+      .bubble {
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: linear 2s, transform 0.2s;
+      }
+
+      .bubble--bust {
+        transform: scale(1.8);
+      }
+      #root {
+        width: 80vw;
+        height: 90vh;
+        border: 1px solid;
+
+        margin: auto;
+        margin-top: 20px;
+      }
+      .contador {
+        border: 1px solid;
+
+        text-align: center;
+        font-size: 1.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="contador"></div>
+    <div id="root"></div>
+    <script>
+      const root = document.querySelector('#root');
+      const divContador = document.querySelector('#contador');
+      divContador.className = 'contador';
+      divContador.innerText = 'Globos explotados';
+      let contador = 1;
+      let { clientHeight, clientWidth } = root;
+      console.log(root.clientHeight, root.clientWidth);
+      if (clientHeight < 300) {
+        clientHeight = 350;
+      }
+      if (clientWidth < 300) {
+        clientWidth = 750;
+      }
+      console.log(contador);
+
+      class Bubble {
+        constructor() {
+          this.bubbleSpan = undefined;
+          this.handleNewBubble();
+          this.color = this.randomColor();
+
+          this.posY = this.randomNumber(clientHeight - 20, 20);
+          this.posX = this.randomNumber(clientWidth - 20, 20);
+
+          this.bubbleSpan.style.top = this.posY + 'px';
+          this.bubbleSpan.style.left = this.posX + 'px';
+
+          // setting height and width of the bubble
+          this.height = this.randomNumber(60, 20);
+          this.width = this.height;
+
+          this.bubbleEnd.call(this.bubbleSpan, 6000);
+        }
+
+        // creates and appends a new bubble in the DOM
+        handleNewBubble() {
+          this.bubbleSpan = document.createElement('span');
+          this.bubbleSpan.classList.add('bubble');
+          root.append(this.bubbleSpan);
+          this.handlePosition();
+          this.bubbleSpan.addEventListener('click', this.explotarGlovo);
+        }
+        explotarGlovo() {
+          this.remove();
+          divContador.innerHTML = 'Globos explotados:' + contador++;
+        }
+
+        handlePosition() {
+          // positioning the bubble in different random X and Y
+          const randomY = this.randomNumber(60, -60);
+          const randomX = this.randomNumber(60, -60);
+
+          this.bubbleSpan.style.backgroundColor = this.color;
+          this.bubbleSpan.style.height = this.height + 'px';
+          this.bubbleSpan.style.width = this.height + 'px';
+
+          this.posY = this.randomNumber(clientHeight - 20, 20);
+          this.posX = this.randomNumber(clientWidth - 20, 20);
+
+          this.bubbleSpan.style.top = this.posY + 'px';
+          this.bubbleSpan.style.left = this.posX + 'px';
+
+          setTimeout(this.handlePosition.bind(this), 2000);
+        }
+
+        randomNumber(max, min) {
+          return Math.floor(Math.random() * (max - min + 1) + min);
+        }
+
+        randomColor() {
+          return `rgba(
+        ${this.randomNumber(0, 255)},
+        ${this.randomNumber(0, 255)},
+        ${this.randomNumber(0, 255)},
+        ${this.randomNumber(0.1, 1)})`;
+        }
+        bubbleEnd(removingTime = 2000) {
+          setTimeout(
+            () => {
+              requestAnimationFrame(() => this.classList.add('bubble--bust'));
+            },
+
+            removingTime === 0 ? removingTime : removingTime - 100
+          );
+
+          setTimeout(() => {
+            requestAnimationFrame(() => {
+              this.remove();
+            });
+            requestAnimationFrame(() => new Bubble());
+          }, removingTime);
+        }
+      }
+
+      // creating many bubble instance
+
+      setInterval(function () {
+        requestAnimationFrame(() => new Bubble());
+      }, 3000);
+    </script>
+  </body>
+</html>

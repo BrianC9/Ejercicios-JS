@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RegExp Bryan Cusme</title>
+    <style>
+      label {
+        display: block;
+      }
+      input {
+        margin: 10px 0;
+      }
+      .resultado {
+        background: aliceblue;
+        padding: 5px;
+        border-radius: 5px;
+      }
+      button {
+        margin: 10px 0;
+      }
+      .contendor {
+        margin: 20px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="contendor">
+      <label for="inputEmail">Divide un email</label>
+      <input type="email" placeholder="Introduce un email" id="inputEmail" />
+      <div id="resultadoEmail" class="resultado"></div>
+      <button id="compruebaEmail">Comrpobar email</button>
+    </div>
+    <div class="contendor">
+      <label for="inpurURL">Divide una URL</label>
+      <input type="text" placeholder="Introduce una URL" id="inputURL" />
+      <div id="resultadoURL" class="resultado"></div>
+      <button id="compruebaURL">Comprobar url</button>
+    </div>
+    <div class="contendor">
+      <label for="inputYT">Extrae ID de link de youtube</label>
+      <input type="text" placeholder="Introduce un link" id="inputYT" />
+      <div id="resultadoYT" class="resultado"></div>
+      <button id="compruebaYT">Comprobar url</button>
+    </div>
+
+    <script>
+      let btnEmail = document.querySelector('#compruebaEmail');
+      let inputEmail = document.querySelector('#inputEmail');
+      let resultadoEmail = document.querySelector('#resultadoEmail');
+      btnEmail.addEventListener('click', compruebaEmail);
+      function compruebaEmail() {
+        let texto = inputEmail.value;
+        let arrEmail = texto.split(/[.@]+/);
+        console.log(arrEmail);
+        resultadoEmail.innerHTML = /.+@.+\.[A-z]{2,}/.test(texto)
+          ? `<p> Nombre usuario: ${arrEmail[0]}</p> <p>Dominio: ${
+              arrEmail[1] + '.' + arrEmail[2]
+            }</p><p>Organización: ${arrEmail[1]}</p><p>TLD: ${arrEmail[2]}</p>`
+          : 'Introduce un email válido';
+      }
+
+      let btnURL = document.querySelector('#compruebaURL');
+      let inputURL = document.querySelector('#inputURL');
+      let resultadoURL = document.querySelector('#resultadoURL');
+      btnURL.addEventListener('click', comprobarURL);
+
+      function comprobarURL() {
+        let url = inputURL.value;
+        let arrURL = url.match(
+          /^(?:([A-Za-z]+):)?(\/{0,3})([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/
+        );
+        console.log(arrURL);
+        resultadoURL.innerHTML =
+          /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(
+            url
+          )
+            ? `<p>URL completa: ${arrURL[0]}</p>
+               <p>Protocolo: ${arrURL[1] ?? 'No especificado'}</p>
+              <p>Dominio: ${arrURL[3]}</p>
+              <p>Recurso: ${arrURL[5]}</p>`
+            : 'Introduce una URL válida';
+      }
+
+      let btnYT = document.querySelector('#compruebaYT');
+      let inputYT = document.querySelector('#inputYT');
+      let resultadoYT = document.querySelector('#resultadoYT');
+      btnYT.addEventListener('click', compruebaYT);
+      function compruebaYT() {
+        let linkYT = inputYT.value;
+        let arrYT = linkYT.match(
+          /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*?[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/
+        );
+        console.log(arrYT);
+        resultadoYT.innerHTML = arrYT ? arrYT[1] : 'Introduce un link válido';
+      }
+    </script>
+  </body>
+</html>

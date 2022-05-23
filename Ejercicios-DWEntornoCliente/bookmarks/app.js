@@ -42,7 +42,6 @@ let listaBookmarks = [
 btnAddBookmarks.addEventListener("click", crearBookmark)
 btnAddEtiquetas.addEventListener('click', crearEtiqueta)
 mostrarBookmarks(listaBookmarks);
-crearBookmark()
 zonaDrop.forEach(zona => {
 
     zona.addEventListener('drop', handleDrop)
@@ -194,9 +193,12 @@ function editarBookmarkIndividual(ev) {
     plataformaInputDetalles.value = [...plataforma]
     generoInputDetalles.value = [...genero]
     console.log(resultadoFiltro)
+    mostrarDetallesBookmark(true)
+
     guardarBookmark.addEventListener('click', () => {
-        actualizarListaBookmarks()
         eliminarDeListaBookmarks(titulo)
+        listaBookmarks.push(leerDatosInputBookmark())
+        mostrarBookmarks(listaBookmarks)
         eliminarDelDom(titulo)
         mensajeConfirmacion()
     })
